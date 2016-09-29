@@ -1,0 +1,22 @@
+{
+
+  "name": "akb/trip-sorter",
+  "authors": [
+    {
+      "name": "AbdelKader BOUADJADJA",
+      "email": "ak.bouadjadja@gmail.com"
+    }
+  ],
+
+  "require-dev": {
+    "phpunit/phpunit": "4.8.*",
+    "phpdocumentor/phpdocumentor":"2.*"
+  },
+
+  "autoload": {
+    "psr-4" : {
+      "TripSort\\" : "src/TripSort"
+    }
+  }
+
+}
