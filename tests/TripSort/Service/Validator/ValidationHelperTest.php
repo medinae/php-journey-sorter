@@ -9,7 +9,7 @@ use TripSort\Service\Validator\ValidationHelper;
  *
  * @author AbdElKader Bouadjadja <ak.bouadjadja@gmail.com>
  */
-class CardSorterTest extends \PHPUnit_Framework_TestCase
+class ValidationHelperTest extends \PHPUnit_Framework_TestCase
 {
     public function testArrayKeysExistsValidCase()
     {

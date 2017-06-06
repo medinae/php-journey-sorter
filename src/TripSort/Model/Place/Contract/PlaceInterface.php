@@ -14,7 +14,7 @@ interface PlaceInterface
      *
      * @return string
      */
-    public function getName();
+    public function getName(): string;
 
     /**
      * Return the place name in a readable form.

@@ -33,33 +33,13 @@ class Trip
         $boardingCards,
         CardSorterInterface $sorter = null
     ) {
-        $this->sorter = $sorter ? $sorter : new CardSorter();
+        $this->sorter = $sorter ?: new CardSorter();
 
         foreach ($boardingCards as $boardingCard) {
             $this->addBoardingCard($boardingCard);
         }
 
         $this->boardingCards = $this->sorter->sort($this->boardingCards);
-    }
-
-    /**
-     * Add a boarding card and ensure that Trip boardingCards are always sorted.
-     *
-     * @param ComparableBoardingCardInterface $boardingCard
-     */
-    protected function addBoardingCard(ComparableBoardingCardInterface $boardingCard)
-    {
-        $this->boardingCards[] = $boardingCard;
-    }
-
-    /**
-     * Return the ordered boarding cards - array format
-     *
-     * @return Model\Cards\Contract\ComparableBoardingCardInterface[]
-     */
-    public function getOrderedBoardingCards()
-    {
-        return $this->boardingCards;
     }
 
     /**
@@ -78,5 +58,25 @@ class Trip
         $output .= 'You have arrived at your final destination.';
 
         return $output;
+    }
+
+    /**
+     * Return the ordered boarding cards - array format
+     *
+     * @return Model\Cards\Contract\ComparableBoardingCardInterface[]
+     */
+    public function getOrderedBoardingCards(): array
+    {
+        return $this->boardingCards;
+    }
+
+    /**
+     * Add a boarding card and ensure that Trip boardingCards are always sorted.
+     *
+     * @param ComparableBoardingCardInterface $boardingCard
+     */
+    protected function addBoardingCard(ComparableBoardingCardInterface $boardingCard): void
+    {
+        $this->boardingCards[] = $boardingCard;
     }
 }

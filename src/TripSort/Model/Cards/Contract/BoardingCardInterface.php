@@ -17,14 +17,14 @@ interface BoardingCardInterface
      *
      * @return PlaceInterface
      */
-    public function getDeparturePlace();
+    public function getDeparturePlace(): PlaceInterface;
 
     /**
      * Getter for arrivalPlace.
      *
      * @return PlaceInterface
      */
-    public function getArrivalPlace();
+    public function getArrivalPlace(): PlaceInterface;
 
     /**
      * Return boarding card into readable form.

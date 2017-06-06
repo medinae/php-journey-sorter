@@ -1,6 +1,8 @@
 {
 
   "name": "akb/trip-sorter",
+  "description": "This API enable you to sort your unordered boarding cards. Technical assessment.",
+  "license": "MIT",
   "authors": [
     {
       "name": "AbdelKader BOUADJADJA",

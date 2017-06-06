@@ -18,5 +18,5 @@ interface BoardingCardLoaderInterface
      *
      * @return BoardingCardInterface[]
      */
-    public function loadCards($data);
+    public function loadCards($data): array;
 }

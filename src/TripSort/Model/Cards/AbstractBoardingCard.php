@@ -44,13 +44,13 @@ abstract class AbstractBoardingCard implements BoardingCardInterface, Comparable
     ) {
         $this->departurePlace = $departurePlace;
         $this->arrivalPlace = $arrivalPlace;
-        $this->seat = $seat ? $seat : 'No seat assignment';
+        $this->seat = $seat ?: 'No seat assignment';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getArrivalPlace()
+    public function getArrivalPlace(): PlaceInterface
     {
         return $this->arrivalPlace;
     }
@@ -58,7 +58,7 @@ abstract class AbstractBoardingCard implements BoardingCardInterface, Comparable
     /**
      * {@inheritdoc}
      */
-    public function getDeparturePlace()
+    public function getDeparturePlace(): PlaceInterface
     {
         return $this->departurePlace;
     }
@@ -68,7 +68,7 @@ abstract class AbstractBoardingCard implements BoardingCardInterface, Comparable
      *
      * @return string
      */
-    public function getSeat()
+    public function getSeat(): string
     {
         return $this->seat;
     }
@@ -76,7 +76,7 @@ abstract class AbstractBoardingCard implements BoardingCardInterface, Comparable
     /**
      * {@inheritdoc}
      */
-    public function hasSameOriginAs($card)
+    public function hasSameOriginAs($card): bool
     {
         return $this->departurePlace->getName() === $card->getArrivalPlace()->getName();
     }
@@ -84,7 +84,7 @@ abstract class AbstractBoardingCard implements BoardingCardInterface, Comparable
     /**
      * {@inheritdoc}
      */
-    public function hasSameDestinationAs($card)
+    public function hasSameDestinationAs($card): bool
     {
         return $this->arrivalPlace->getName() === $card->getDeparturePlace()->getName();
     }

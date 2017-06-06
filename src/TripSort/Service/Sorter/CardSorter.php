@@ -15,7 +15,7 @@ class CardSorter implements CardSorterInterface
     /**
      * {@inheritdoc}
      */
-    public function sort(array $boardingCards)
+    public function sort(array $boardingCards): array
     {
         if (empty($boardingCards)) {
             throw new \Exception('No boarding cards to sort.');

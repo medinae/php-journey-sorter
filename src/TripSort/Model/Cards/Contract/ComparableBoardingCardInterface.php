@@ -17,7 +17,7 @@ interface ComparableBoardingCardInterface
      *
      * @return bool
      */
-    public function hasSameOriginAs($card);
+    public function hasSameOriginAs($card): bool;
 
     /**
      * Check if current card has same destination as the given card
@@ -26,5 +26,5 @@ interface ComparableBoardingCardInterface
      *
      * @return bool
      */
-    public function hasSameDestinationAs($card);
+    public function hasSameDestinationAs($card): bool ;
 }

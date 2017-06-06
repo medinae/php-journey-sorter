@@ -49,7 +49,7 @@ class FlightBoardingCard extends AbstractBoardingCard
         $this->seat = $seat;
         $this->idFlight = $idFlight;
         $this->gate = $gate;
-        $this->baggageTicketCounter = $baggageTicketCounter ? $baggageTicketCounter : 'Automatically transferred';
+        $this->baggageTicketCounter = $baggageTicketCounter ?: 'Automatically transferred';
     }
 
     /**

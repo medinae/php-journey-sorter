@@ -12,7 +12,7 @@
 
     <testsuites>
         <testsuite>
-            <directory>tests/TripSort/</directory>
+            <directory>tests/</directory>
         </testsuite>
     </testsuites>
 

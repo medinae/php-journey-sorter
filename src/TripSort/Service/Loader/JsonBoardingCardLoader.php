@@ -21,7 +21,7 @@ class JsonBoardingCardLoader implements BoardingCardLoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function loadCards($json)
+    public function loadCards($json): array
     {
         try {
             $data = json_decode($json, true);
@@ -54,7 +54,7 @@ class JsonBoardingCardLoader implements BoardingCardLoaderInterface
     protected function createCards(array $cardData)
     {
         if (!Validator::arrayKeysExists($cardData, 'type', 'from', 'to', 'seat')) {
-            throw new \Exception(
+            throw new \InvalidArgumentException(
                 'Missing required keys to create boarding card. Check type, from, to and seat keys.'
             );
         }
@@ -64,7 +64,7 @@ class JsonBoardingCardLoader implements BoardingCardLoaderInterface
         switch ($type) {
             case 'flight':
                 if (!Validator::arrayKeysExists($cardData, 'id', 'gate', 'baggage')) {
-                    throw new \Exception(
+                    throw new \InvalidArgumentException(
                         'Missing required keys to create FlightBoardingCard. Check id, gate and baggage.'
                     );
                 }
@@ -85,7 +85,7 @@ class JsonBoardingCardLoader implements BoardingCardLoaderInterface
                 );
             case 'train':
                 if (!array_key_exists('id', $cardData)) {
-                    throw new \Exception('Missing id key to create TrainBoardingCard.');
+                    throw new \InvalidArgumentException('Missing id key to create TrainBoardingCard.');
                 }
 
                 return new TrainBoardingCard(

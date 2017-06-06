@@ -16,5 +16,5 @@ interface CardSorterInterface
      *
      * @param ComparableBoardingCardInterface[] $cards
      */
-    public function sort(array $cards);
+    public function sort(array $cards): array;
 }
