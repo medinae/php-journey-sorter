@@ -2,80 +2,44 @@
 
 namespace TripSort;
 
-use TripSort\Model\Cards\Contract\ComparableBoardingCardInterface;
-use TripSort\Service\Sorter\Contract\CardSorterInterface;
+use TripSort\Model\Cards\BoardingCardInterface;
+use TripSort\Service\Sorter\CardSorterInterface;
 use TripSort\Service\Sorter\CardSorter;
 
 /**
- * Take boarding cards, sort it thanks to the injected sorter and offer various output
- *
  * @author AbdElKader Bouadjadja <ak.bouadjadja@gmail.com>
  */
 class Trip
 {
     /**
-     * @var CardSorterInterface
+     * @var BoardingCardInterface[]
      */
-    protected $sorter;
+    private $boardingCards = [];
 
     /**
-     * @var ComparableBoardingCardInterface[]
+     * @param BoardingCardInterface[] $boardingCards
+     * @param CardSorterInterface|null          $sorter
      */
-    protected $boardingCards = [];
-
-    /**
-     * Trip constructor.
-     *
-     * @param ComparableBoardingCardInterface[]  $boardingCards
-     * @param CardSorterInterface|null $sorter
-     */
-    public function __construct(
-        $boardingCards,
-        CardSorterInterface $sorter = null
-    ) {
-        $this->sorter = $sorter ?: new CardSorter();
+    public function __construct(array $boardingCards, CardSorterInterface $sorter = null)
+    {
+        $sorter = $sorter ?: new CardSorter();
 
         foreach ($boardingCards as $boardingCard) {
             $this->addBoardingCard($boardingCard);
         }
 
-        $this->boardingCards = $this->sorter->sort($this->boardingCards);
+        $this->boardingCards = $sorter->sort($this->boardingCards);
     }
 
     /**
-     * Print the trip information into human readable form.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        $output = null;
-
-        foreach ($this->boardingCards as $boardingCard) {
-            $output .= $boardingCard.PHP_EOL;
-        }
-
-        $output .= 'You have arrived at your final destination.';
-
-        return $output;
-    }
-
-    /**
-     * Return the ordered boarding cards - array format
-     *
-     * @return Model\Cards\Contract\ComparableBoardingCardInterface[]
+     * @return Model\Cards\BoardingCardInterface[]
      */
     public function getOrderedBoardingCards(): array
     {
         return $this->boardingCards;
     }
 
-    /**
-     * Add a boarding card and ensure that Trip boardingCards are always sorted.
-     *
-     * @param ComparableBoardingCardInterface $boardingCard
-     */
-    protected function addBoardingCard(ComparableBoardingCardInterface $boardingCard): void
+    private function addBoardingCard(BoardingCardInterface $boardingCard): void
     {
         $this->boardingCards[] = $boardingCard;
     }

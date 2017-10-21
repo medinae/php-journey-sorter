@@ -6,12 +6,10 @@ use TripSort\Model\Cards\BusBoardingCard;
 use TripSort\Model\Cards\FlightBoardingCard;
 use TripSort\Model\Cards\TrainBoardingCard;
 use TripSort\Model\Place\Place;
-use TripSort\Service\Sorter\Contract\CardSorterInterface;
+use TripSort\Service\Sorter\CardSorterInterface;
 use TripSort\Service\Sorter\CardSorter;
 
 /**
- * CardSorter unit test class
- *
  * @author AbdElKader Bouadjadja <ak.bouadjadja@gmail.com>
  */
 class CardSorterTest extends \PHPUnit_Framework_TestCase
@@ -32,13 +30,13 @@ class CardSorterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider boardingCardsProvider
+     * @dataProvider provideBoardingCards
      */
-    public function testSort($boardingCards, $expected)
+    public function testSort(array $boardingCards, array $expectedBoardingCards)
     {
-        $sorted = $this->sorter->sort($boardingCards);
+        $sortedBoardingCards = $this->sorter->sort($boardingCards);
 
-        $this->assertEquals($expected, $sorted);
+        $this->assertSame($expectedBoardingCards, $sortedBoardingCards);
     }
 
     /**
@@ -63,7 +61,7 @@ class CardSorterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage No boarding cards to sort.
      */
     public function testSortEmptyArray()
@@ -98,10 +96,7 @@ class CardSorterTest extends \PHPUnit_Framework_TestCase
         $this->sorter->sort([$card2, $card1, $card3]);
     }
 
-    /**
-     * Provider for testSort test
-     */
-    public function boardingCardsProvider()
+    public function provideBoardingCards()
     {
         $card1 = new FlightBoardingCard(
             new Place('London'),

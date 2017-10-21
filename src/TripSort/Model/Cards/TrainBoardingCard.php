@@ -2,41 +2,29 @@
 
 namespace TripSort\Model\Cards;
 
-use TripSort\Model\Place\Contract\PlaceInterface;
+use TripSort\Model\Place\Place;
 
 /**
- * Class Train boarding card
- *
  * @author AbdElKader Bouadjadja <ak.bouadjadja@gmail.com>
  */
-class TrainBoardingCard extends AbstractBoardingCard
+class TrainBoardingCard implements BoardingCardInterface
 {
-    /**
-     * @var string
-     */
-    protected $idTrain;
+    use BoardingCardTrait;
 
-    /**
-     * TrainBoardingCard constructor.
-     *
-     * @param PlaceInterface $departurePlace
-     * @param PlaceInterface $arrivalPlace
-     * @param string         $seat
-     * @param string         $idTrain
-     */
+    private $idTrain;
+
     public function __construct(
-        PlaceInterface $departurePlace,
-        PlaceInterface $arrivalPlace,
-        $seat,
-        $idTrain
+        Place $departurePlace,
+        Place $arrivalPlace,
+        string $seat,
+        string $idTrain
     ) {
-        parent::__construct($departurePlace, $arrivalPlace, $seat);
+        $this->departurePlace = $departurePlace;
+        $this->arrivalPlace = $arrivalPlace;
+        $this->seat = $seat;
         $this->idTrain = $idTrain;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function __toString()
     {
         return sprintf(

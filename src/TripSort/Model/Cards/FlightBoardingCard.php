@@ -2,59 +2,35 @@
 
 namespace TripSort\Model\Cards;
 
-use TripSort\Model\Place\Contract\PlaceInterface;
+use TripSort\Model\Place\Place;
 
 /**
- * Flight boarding card
- *
  * @author AbdElKader Bouadjadja <ak.bouadjadja@gmail.com>
  */
-class FlightBoardingCard extends AbstractBoardingCard
+class FlightBoardingCard implements BoardingCardInterface
 {
-    /**
-     * @var string
-     */
-    protected $idFlight;
+    use BoardingCardTrait;
 
-    /**
-     * @var string
-     */
-    protected $gate;
+    private $idFlight;
+    private $gate;
+    private $baggageTicketCounter;
 
-    /**
-     * @var string
-     */
-    protected $baggageTicketCounter;
-
-    /**
-     * FlightBoardingCard constructor.
-     *
-     * @param PlaceInterface $departurePlace
-     * @param PlaceInterface $arrivalPlace
-     * @param string         $seat
-     * @param string         $idFlight
-     * @param string         $gate
-     * @param string         $baggageTicketCounter
-     */
     public function __construct(
-        PlaceInterface $departurePlace,
-        PlaceInterface $arrivalPlace,
-        $seat,
-        $idFlight,
-        $gate,
-        $baggageTicketCounter
+        Place $departurePlace,
+        Place $arrivalPlace,
+        string $seat,
+        string $idFlight,
+        string $gate,
+        string $baggageTicketCounter = null
     ) {
-        parent::__construct($departurePlace, $arrivalPlace, $seat);
-
+        $this->departurePlace = $departurePlace;
+        $this->arrivalPlace = $arrivalPlace;
         $this->seat = $seat;
         $this->idFlight = $idFlight;
         $this->gate = $gate;
         $this->baggageTicketCounter = $baggageTicketCounter ?: 'Automatically transferred';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function __toString()
     {
         return sprintf(

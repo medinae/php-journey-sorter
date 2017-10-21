@@ -5,8 +5,6 @@ namespace Test\TripSort\Service\Validator;
 use TripSort\Service\Validator\ValidationHelper;
 
 /**
- * ValidationHelper unit test class
- *
  * @author AbdElKader Bouadjadja <ak.bouadjadja@gmail.com>
  */
 class ValidationHelperTest extends \PHPUnit_Framework_TestCase
@@ -18,7 +16,7 @@ class ValidationHelperTest extends \PHPUnit_Framework_TestCase
             'password' => 'hkdhs777djh',
         ];
 
-        $this->assertTrue(ValidationHelper::arrayKeysExists($user, 'username', 'password'));
+        $this->assertTrue(ValidationHelper::arrayKeysExists($user, ['username', 'password']));
     }
 
     public function testArrayKeysExistsInvalidCase()
@@ -28,6 +26,6 @@ class ValidationHelperTest extends \PHPUnit_Framework_TestCase
             'star' => 'Balotelli',
         ];
 
-        $this->assertFalse(ValidationHelper::arrayKeysExists($club, 'name', 'star', 'budget'));
+        $this->assertFalse(ValidationHelper::arrayKeysExists($club, ['name', 'star', 'budget']));
     }
 }

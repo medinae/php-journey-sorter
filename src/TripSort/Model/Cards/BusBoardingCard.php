@@ -2,16 +2,22 @@
 
 namespace TripSort\Model\Cards;
 
+use TripSort\Model\Place\Place;
+
 /**
- * Bus boarding card
- *
  * @author AbdElKader Bouadjadja <ak.bouadjadja@gmail.com>
  */
-class BusBoardingCard extends AbstractBoardingCard
+class BusBoardingCard implements BoardingCardInterface
 {
-    /**
-     * {@inheritdoc}
-     */
+    use BoardingCardTrait;
+
+    public function __construct(Place $departurePlace, Place $arrivalPlace, string $seat = null)
+    {
+        $this->departurePlace = $departurePlace;
+        $this->arrivalPlace = $arrivalPlace;
+        $this->seat = $seat ?: 'No seat assignment';
+    }
+
     public function __toString()
     {
         return sprintf(

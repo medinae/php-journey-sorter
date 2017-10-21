@@ -2,43 +2,25 @@
 
 namespace TripSort\Model\Place;
 
-use TripSort\Model\Place\Contract\PlaceInterface;
-
 /**
- * Class Place
- *
  * @author AbdElKader Bouadjadja <ak.bouadjadja@gmail.com>
  */
-class Place implements PlaceInterface
+class Place
 {
-    /**
-     * @var string
-     */
-    protected $name;
+    private $name;
 
-    /**
-     * Place constructor.
-     *
-     * @param string $name
-     */
-    public function __construct($name)
+    public function __construct(string $name)
     {
         $this->name = $name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function __toString()
     {
-        return (string) $this->name;
+        return $this->name;
     }
 }

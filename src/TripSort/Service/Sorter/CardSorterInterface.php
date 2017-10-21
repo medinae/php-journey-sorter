@@ -1,8 +1,8 @@
 <?php
 
-namespace TripSort\Service\Sorter\Contract;
+namespace TripSort\Service\Sorter;
 
-use TripSort\Model\Cards\Contract\ComparableBoardingCardInterface;
+use TripSort\Model\Cards\ComparableBoardingCardInterface;
 
 /**
  * New sorters have to implements this interface
@@ -12,9 +12,9 @@ use TripSort\Model\Cards\Contract\ComparableBoardingCardInterface;
 interface CardSorterInterface
 {
     /**
-     * Sort a boarding cards array from origin to destination.
-     *
      * @param ComparableBoardingCardInterface[] $cards
+     *
+     * @return array
      */
     public function sort(array $cards): array;
 }

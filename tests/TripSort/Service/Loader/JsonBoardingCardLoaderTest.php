@@ -5,12 +5,10 @@ namespace Test\TripSort\Service\Loader;
 use TripSort\Model\Cards\BusBoardingCard;
 use TripSort\Model\Cards\FlightBoardingCard;
 use TripSort\Model\Cards\TrainBoardingCard;
-use TripSort\Service\Loader\Contract\BoardingCardLoaderInterface;
+use TripSort\Service\Loader\BoardingCardLoaderInterface;
 use TripSort\Service\Loader\JsonBoardingCardLoader;
 
 /**
- * JsonBoardingCardLoader unit test class
- *
  * @author AbdElKader Bouadjadja <ak.bouadjadja@gmail.com>
  */
 class JsonBoardingCardLoaderTest extends \PHPUnit_Framework_TestCase
@@ -66,13 +64,13 @@ class JsonBoardingCardLoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(BusBoardingCard::class, $generatedCards[1]);
         $this->assertInstanceOf(FlightBoardingCard::class, $generatedCards[2]);
 
-        $this->assertEquals($trainData['seat'], $generatedCards[0]->getSeat());
-        $this->assertEquals('No seat assignment', $generatedCards[1]->getSeat());
-        $this->assertEquals($flightData['seat'], $generatedCards[2]->getSeat());
+        $this->assertSame($trainData['seat'], $generatedCards[0]->getSeat());
+        $this->assertSame('No seat assignment', $generatedCards[1]->getSeat());
+        $this->assertSame($flightData['seat'], $generatedCards[2]->getSeat());
     }
 
     /**
-     * @expectedException \Exception
+     * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage No valid data. Impossible to load boarding cards.
      */
     public function testLoadCardsWithoutData()
@@ -151,16 +149,5 @@ class JsonBoardingCardLoaderTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->loader->loadCards($invalidJson);
-    }
-
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage Invalid input data. Please provide valid JSON.
-     */
-    public function testLoadCardsWithoutJSONInput()
-    {
-        $invalidData = new \stdClass();
-
-        $this->loader->loadCards($invalidData);
     }
 }

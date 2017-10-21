@@ -3,35 +3,12 @@
 namespace TripSort\Service\Validator;
 
 /**
- * Helper for data validation
- *
  * @author AbdElKader Bouadjadja <ak.bouadjadja@gmail.com>
  */
 class ValidationHelper
 {
-    /**
-     * Check is keys exists in an array
-     *
-     * @param array $array
-     * @param array $keys
-     *
-     * @return bool
-     */
-    public static function arrayKeysExists(array $array, $keys)
+    public static function arrayKeysExists(array $array, array $keys): bool
     {
-        $count = 0;
-
-        if (!is_array($keys)) {
-            $keys = func_get_args();
-            array_shift($keys);
-        }
-
-        foreach ($keys as $key) {
-            if (array_key_exists($key, $array)) {
-                $count ++;
-            }
-        }
-
-        return count($keys) === $count;
+        return 0 === count(array_diff($keys, array_keys($array)));
     }
 }

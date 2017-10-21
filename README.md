@@ -1,6 +1,5 @@
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/350f9181-b4ab-4f8b-8094-a216328916da/mini.png)](https://insight.sensiolabs.com/projects/350f9181-b4ab-4f8b-8094-a216328916da)
-[![Build Status](https://travis-ci.org/medinae/php-journey-sorter.svg?branch=master)](https://travis-ci.org/medinae/php-trip-sorter)
-
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/0d184d8b-49b6-4969-ad1a-ffbafb23714c/mini.png)](https://insight.sensiolabs.com/projects/0d184d8b-49b6-4969-ad1a-ffbafb23714c)
+[![Build Status](https://travis-ci.org/medinae/php-journey-sorter.svg?branch=master)](https://travis-ci.org/medinae/php-journey-sorter)
 # Journey
 
 by AbdElKader Bouadjadja <ak.bouadjadja@gmail.com>
@@ -9,7 +8,7 @@ This API enable you to sort your unordered boarding cards.
 
 ## Installation && Tests
 
-Build the docker container and run it :
+Build the docker image and run it to make it a container :
 
 ```bash
  docker build -t medinae/journey .
@@ -48,14 +47,13 @@ Build the docker container and run it :
 You can create some new boarding card objects by implementing BoardingCardInterface. Be careful, if you want your boarding card object to be sortable by the API sorter, don't forget to implements ComparableBoardingCardInterface.
 Also, add it in the loaders factory.
 
-Then, if your boarding card contain a seat property, keep calm and use AbstractBoardingCard !
-
 Example :     
     
 ```php
-    class FerryBoardingCard extends AbstractBoardingCard
+    class FerryBoardingCard implements BoardingCardInterface
     {
-    
+        use BoardingCardTrait;
+        
         private $isGoldClass;
         
         public function __toString()
@@ -81,7 +79,7 @@ Then, the loader have to be change in order to create ferry boarding cards with 
             // ...
         }
     
-        protected function createCards(array $cardData)
+        protected function createCard(array $cardData)
         {
             // ...
                 case 'ferry':
@@ -108,7 +106,7 @@ Then, a possible enhancement of the API can be an XMLBoardingCardLoader like :
 ```php
     class XMLBoardingCardLoader implements BoardingCardLoaderInterface
     {
-        public function loadCards($json)
+        public function loadCards(string $xml): array
         {
             // Logic to create boarding cards objects cards from XML
         }
@@ -121,19 +119,9 @@ Finally, it's also possible to extend the code by creating new sorters by implem
 ```php
     class AwesomeSorter implements CardSorterInterface
     {
-        public function sort(array $boardingCards)
+        public function sort(array $boardingCards): array
         {
             // Your awesome algorithm
         }
     }
 ```
-
-## Doc
-
-Generate the documentation : 
-
-```bash
- vendor/phpdocumentor/phpdocumentor/bin/phpdoc -d src/ -t docs/api
-```
-
-Mail  : ak.bouadjadja@gmail.com
